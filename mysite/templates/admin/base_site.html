@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'NAME OF THING site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'NAME OF THING administration' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+<!--Note that any of Django's default admin templates can be overridden. 
+To override a template, just do the same thing you did with base_site.html -- 
+copy it from the default directory into your custom directory, and make changes.-->
