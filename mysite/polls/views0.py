@@ -6,6 +6,24 @@ from django.template import RequestContext
 from polls.models import Choice, Poll
 
 
+def index(request):
+    latest_poll_list = Poll.objects.all().order_by('-pub_date')[:5]
+    return render_to_response('polls/index.html', {'latest_poll_list': latest_poll_list})
+    #t = loader.get_template('polls/index.html')
+    #c = Context({
+        #'latest_poll_list': latest_poll_list,
+    #})
+    #return HttpResponse(t.render(c))
+
+def detail(request, poll_id):
+    p = get_object_or_404(Poll, pk=poll_id)
+    return render_to_response('polls/detail.html', {'poll': p},
+                              context_instance=RequestContext(request))
+
+def results(request, poll_id):
+    p = get_object_or_404(Poll, pk=poll_id)
+    return render_to_response('polls/results.html', {'poll': p})
+
 def vote(request, poll_id):
     p = get_object_or_404(Poll, pk=poll_id)
     try:
@@ -22,6 +40,6 @@ def vote(request, poll_id):
         #Always return an HttpResponseRedirect after successfully dealing
         #with POST data. This prevents data from being posted twice is a
         #user hits the Back button.
-        return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
+        return HttpResponseRedirect(reverse('polls.views.results', args=(p.id,)))
 
 #https://docs.djangoproject.com/en/dev/intro/tutorial04/#write-a-simple-form
