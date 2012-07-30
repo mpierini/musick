@@ -7,6 +7,11 @@ from django.utils import timezone
 #utilities in django.utils.timezone, respectively.
 
 # Create your models here.
+#class Songs(models.Model):
+   #id = models.?
+   #url = models.?
+   #name = models.?
+
 class Poll(models.Model):
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')

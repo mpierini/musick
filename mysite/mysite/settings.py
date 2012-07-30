@@ -124,6 +124,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'polls', #Now Django knows to include the polls app.
+    'south', #Now Django knows to include the south db migration.
+    'southtut', #South tutorial app...
+    'southtut2', #another South tutorial app.
 )
 
 # A sample logging configuration. The only tangible logging
