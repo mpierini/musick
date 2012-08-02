@@ -124,7 +124,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     # 'name of app dir',
+    'south',
     'southdb',
+    'players',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -12,7 +12,7 @@
         $("#jquery_jplayer_1").jPlayer({
           ready: function () {
             $(this).jPlayer("setMedia", {
-              mp3: "http://www.aolcdn.com/tmz_audio/020209_christianbale.mp3"	
+              mp3: "{{ song.url }}" <!--"http://www.terriblerecordsus.com/blog/wp-content/uploads/2009/06/boneless-remix-100208wav-final.mp3"-->	
             });
           },
 	  cssSelectorAncestor: "#jp_container_1",
@@ -28,7 +28,7 @@
         $("#jquery_jplayer_2").jPlayer({
           ready: function () {
             $(this).jPlayer("setMedia", {
-              mp3: "http://www.vicerecords.com/vicerecords/download/vybz_kartel-money_remix_feat_action_bronson-prod_by_dre_skull.mp3"		
+              mp3: "{{ song.url }}" <!--"http://www.vicerecords.com/vicerecords/download/vybz_kartel-money_remix_feat_action_bronson-prod_by_dre_skull.mp3"-->
             });
           },
 	  cssSelectorAncestor: "#jp_container_2",
@@ -41,6 +41,7 @@
 </head>
 
 <body>
+<!--{{ song.url }}-->
   <!--JPLAYER1 CODE STARTS HERE-->
       <div id="jquery_jplayer_1" class="jp-jplayer"></div>
         <div id="jp_container_1" class="jp-audio">
@@ -73,7 +74,7 @@
         </div>
         <div class="jp-title">
           <ul>
-            <li>Bubble</li>
+            <li>{{ song.artist }} :: {{ song.name }}</li>
           </ul>
         </div>
         <div class="jp-no-solution">
@@ -82,7 +83,7 @@
         </div>
       </div>
     </div>
-  <!--JPLAYER1 CODE ENDS HERE-->
+  <!--JPLAYER1 CODE ENDS HERE--> 
 
   <!--JPLAYER2 CODE STARTS HERE-->
       <div id="jquery_jplayer_2" class="jp-jplayer"></div>
@@ -116,7 +117,7 @@
               </div>
               <div class="jp-title">
                 <ul>
-                  <li>Gum</li>
+                  <li>{{ song.artist }} :: {{ song.name }}</li>
                 </ul>
               </div>
               <div class="jp-no-solution">
