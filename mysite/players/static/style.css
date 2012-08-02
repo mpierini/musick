@@ -1,0 +1,21 @@
+body {
+    background-color: #00CCCC;
+}
+
+div.wrapper {
+    width: 500px;
+}
+
+div.side {
+    width: 30%;
+    background:url (
+        data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
+	AAAAQAAAAECAYAAACp8Z5+AAAAHkIEQVQIW2NkQAX/GZ
+	H4/4FsRpgAmAOSBBFwDkgAAIKuBATRTAAZAAAAAEIFTk
+	SuQmCC
+    ) repeat;
+}
+
+div.mid {
+    width: 30%;
+}

@@ -7,14 +7,15 @@ from southdb.models import Song
 from south.db import db
 
 
-def get_song(request, song_id):
+def get_song(request):
+    pass
     #having issues with variable song_ids
-    ids = db.Song.id #getting ids from id column
-    for song_id in ids: #looping through ids
-        if not song_id in d['song']: #if the specific song's info hasn't been put into a dictionary yet:
-            song = Song.objects.get(song_id) #get the specific song's info
-            d = {'song':song} #put the info in a dictionary
-    return render_to_response('players/index.html', d) #from previous...
+    #ids = db.Song.id #getting ids from id column??
+    #for song_id in ids: #looping through ids
+        #if not song_id in d['song']: #if the specific song's info hasn't been put into a dictionary yet:
+            #song = Song.objects.get(song_id) #get the specific song's info
+            #d = {'song':song} #put the info in a dictionary
+    return render_to_response('players/index.html') #, d) from previous...
     
     #p = get_object_or_404(Song, pk=song_id)
     #try:

@@ -1,3 +1,5 @@
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css')}}">
+
 <head>
   <!--To use the jPlayer skin, add the following line to the HTML of your page's <head>:-->
   <link type="text/css" href="/static/skin/jplayer.blue.monday.css" rel="stylesheet" />
@@ -41,7 +43,12 @@
 </head>
 
 <body>
-<!--{{ song.url }}-->
+  <div class='wrapper'>
+  <!--{{ song.url }}-->
+    <div class='side'>
+    </div>
+    
+    <div class='mid'>
   <!--JPLAYER1 CODE STARTS HERE-->
       <div id="jquery_jplayer_1" class="jp-jplayer"></div>
         <div id="jp_container_1" class="jp-audio">
@@ -127,4 +134,9 @@
             </div>
        </div>
       <!--JPLAYER2 CODE ENDS HERE-->
+    </div>
+
+    <div class='side'>
+    </div>
+  </div>
 </body>
