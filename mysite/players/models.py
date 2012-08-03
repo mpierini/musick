@@ -5,7 +5,6 @@ from django.utils import timezone
 
 # Create your models here.
 class Song(models.Model):
-    id = models.IntegerField(primary_key=True)
     #default primary_key is already an id field??
     url = models.CharField(max_length=200)
     name = models.CharField(max_length=100)
@@ -13,6 +12,9 @@ class Song(models.Model):
     #blog_name = models.CharField(max_length=100) // link!
     #duration = models.IntegerField(null=False)
     #time_stamp = models.DateField()
+
+    def __unicode__(self):
+        return u"%s - %s"%(self.artist, self.name)
 
 #class Playlist(models.Model):
     #id = models.IntegerField(primary_key=True) keep it default, tho?

@@ -3,21 +3,23 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
-from southdb.models import Song
-from south.db import db
+from models import Song
 
 def home_view(request):
     return render_to_response("home.html")
 
-def get_song(request):
-    pass
+def list_songs(request):
+    songs = Song.objects.all().order_by('-id')
+    return render_to_response('sample.html', {"all_songs": songs})
+
+
     #having issues with variable song_ids
     #ids = db.Song.id #getting ids from id column??
     #for song_id in ids: #looping through ids
         #if not song_id in d['song']: #if the specific song's info hasn't been put into a dictionary yet:
             #song = Song.objects.get(song_id) #get the specific song's info
             #d = {'song':song} #put the info in a dictionary
-    return render_to_response('index.html') #, d) from previous...
+    #return render_to_response('sample.html') #, d) from previous...
     
     #p = get_object_or_404(Song, pk=song_id)
     #try:

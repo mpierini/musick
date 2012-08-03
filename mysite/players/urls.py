@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import DetailView, ListView, TemplateView
-from southdb.models import Song
+from models import Song
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^mysite/', include('mysite.foo.urls')),
 
     #url(r'^$', TemplateView.as_view(template_name="players/index.html")),
-    url(r'^$', 'players.views.get_song'),
+    url(r'^$', 'players.views.list_songs'),
 
     #url(r'^$',    
 	#ListView.as_view(

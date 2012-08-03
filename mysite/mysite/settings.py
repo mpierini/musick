@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     # 'name of app dir',
     'south',
-    'southdb',
     'players',
 )
 
