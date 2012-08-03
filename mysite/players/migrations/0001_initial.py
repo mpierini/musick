@@ -9,26 +9,28 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Song'
-        db.create_table('southdb_song', (
+        db.create_table('players_song', (
             ('id', self.gf('django.db.models.fields.IntegerField')(primary_key=True)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('url', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('artist', self.gf('django.db.models.fields.CharField')(max_length=100)),
         ))
-        db.send_create_signal('southdb', ['Song'])
+        db.send_create_signal('players', ['Song'])
 
 
     def backwards(self, orm):
         # Deleting model 'Song'
-        db.delete_table('southdb_song')
+        db.delete_table('players_song')
 
 
     models = {
-        'southdb.song': {
+        'players.song': {
             'Meta': {'object_name': 'Song'},
+            'artist': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'url': ('django.db.models.fields.CharField', [], {'max_length': '200'})
         }
     }
 
-    complete_apps = ['southdb']
+    complete_apps = ['players']

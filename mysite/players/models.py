@@ -2,40 +2,26 @@ from django.db import models
 
 import datetime 
 from django.utils import timezone 
-#Note the addition of import datetime and from django.utils import timezone,
-#to reference Python's standard datetime module and Django's time-zone-related
-#utilities in django.utils.timezone, respectively.
 
 # Create your models here.
-#class Songs(models.Model):
-   #id = models.?
-   #url = models.?
-   #name = models.?
+class Song(models.Model):
+    id = models.IntegerField(primary_key=True)
+    #default primary_key is already an id field??
+    url = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
+    artist = models.CharField(max_length=100)
+    #blog_name = models.CharField(max_length=100) // link!
+    #duration = models.IntegerField(null=False)
+    #time_stamp = models.DateField()
 
-class Poll(models.Model):
-    question = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+#class Playlist(models.Model):
+    #id = models.IntegerField(primary_key=True) keep it default, tho?
+    #songs = models.ManyToManyField(Song)
 
-    def __unicode__(self):
-        return self.question
-        #It's important to add __unicode__() methods
-        #to your models, not only for your own sanity
-        #when dealing with the interactive prompt,
-        #but also because objects' representations are used
-        #throughout Django's automatically-generated admin.
-
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
-        #custom method
-    
-    was_published_recently.admin_order_field = 'pub_date'
-    was_published_recently.boolean = True
-    was_published_recently.short_description = 'Published recently?'
-
-class Choice(models.Model):
-    poll = models.ForeignKey(Poll)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField()
-
-    def __unicode__(self):
-        return self.choice_text
+#class Users(models.Model);
+    #id = models.IntegerField(primary_key=True) default?
+    #username = models.CharField(max_length=100)
+    #password = models.CharField(max_length=8) or weird salting and hashing thing?
+    #playlists = models.ManyToManyField(Playlist)
+    #they also have songs not in playlists, too? considered one unordered playlist?
+    #account info/avatar pic maybe...

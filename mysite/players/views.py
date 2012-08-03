@@ -6,6 +6,8 @@ from django.template import RequestContext
 from southdb.models import Song
 from south.db import db
 
+def home_view(request):
+    return render_to_response("home.html")
 
 def get_song(request):
     pass
@@ -15,7 +17,7 @@ def get_song(request):
         #if not song_id in d['song']: #if the specific song's info hasn't been put into a dictionary yet:
             #song = Song.objects.get(song_id) #get the specific song's info
             #d = {'song':song} #put the info in a dictionary
-    return render_to_response('players/index.html') #, d) from previous...
+    return render_to_response('index.html') #, d) from previous...
     
     #p = get_object_or_404(Song, pk=song_id)
     #try:
