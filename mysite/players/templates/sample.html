@@ -6,8 +6,19 @@
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
 </head>
 <body>
-    <h1>Sample stuff</h1>
-    <div id="song-list">
+    <div class="head">
+    <h1>NAME OF THING</h1>
+    </div>
+    
+    <div class="info-bar">
+    </div>
+
+    <div class="wrapper">
+
+    <div class="side1">
+    </div>
+
+    <div class="song-list">
 
     {% for song in all_songs %}
       <div id="jquery_jplayer_{{song.id}}" class="jp-jplayer"></div>
@@ -52,6 +63,11 @@
     </div>
 
     {% endfor %}
+    </div>
+
+    <div class="side2">
+    </div>
+
     </div>
 </body>
 
