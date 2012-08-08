@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Song
+from models import Song, Playlist
 
 #class SongInLine(admin.TabularInline):
     #model = Song
@@ -34,6 +34,7 @@ from models import Song
     #That adds hierarchical navigation, by date, to the top of the change list page.
 
 admin.site.register(Song)
+admin.site.register(Playlist)
 #admin.site.register(Poll, PollAdmin)
 #You'll follow this pattern -- create a model admin object,
 #then pass it as the second argument to admin.site.register()

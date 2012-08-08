@@ -16,9 +16,13 @@ class Song(models.Model):
     def __unicode__(self):
         return u"%s - %s"%(self.artist, self.name)
 
-#class Playlist(models.Model):
+class Playlist(models.Model):
     #id = models.IntegerField(primary_key=True) keep it default, tho?
-    #songs = models.ManyToManyField(Song)
+    songs = models.ManyToManyField(Song, related_name="+")
+    name = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.name
 
 #class Users(models.Model);
     #id = models.IntegerField(primary_key=True) default?
