@@ -5,7 +5,12 @@ body {
 }
 
 div.head {
-    
+    background-color: #00CCCC;
+    position: fixed;
+    top: 0;
+    height: 134px;
+    width: 100%;
+    z-index: 100;
 }
 
 div.info-bar {
@@ -16,9 +21,9 @@ div.info-bar {
 
 div.wrapper {
     height: 100%;
-    overflow: scroll;
+    margin-top: 134px;
+    background: url('pyramid.png');
 }
-
 
 div.side1 {
     width: 25%;
@@ -39,7 +44,14 @@ div.side2 {
 }
 
 div.song-list {
-    width: 30%;
-    position: fixed;
-    left: 29.5%;
+    height: 100%;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #00CCCC;
+}
+
+div.jp-audio {
+    margin-left: auto;
+    margin-right: auto;
 }
