@@ -15,7 +15,8 @@ div.info-bar {
 }
 
 div.wrapper {
-    width: 500px;
+    height: 100%;
+    overflow: scroll;
 }
 
 
@@ -40,6 +41,5 @@ div.side2 {
 div.song-list {
     width: 30%;
     position: fixed;
-    top: 120px;
     left: 29.5%;
 }
