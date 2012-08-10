@@ -19,12 +19,3 @@ for each in blogs:
         if '.mp3' in url:
 			print url
 			id3.add_new_file(url)
-	    #print url
-      
-           #for each in soup.stripped_strings:
-	        #print (repr(each))
-
-
-
-
-

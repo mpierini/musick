@@ -1,4 +1,4 @@
-# Create your views here.
+# Create your views here
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -12,14 +12,21 @@ def list_songs(request):
     songs = Song.objects.all().order_by('-id')
     return render_to_response('sample.html', {"all_songs": songs})
 
+def list_playlists(request):
+    playlists = Playlist.objects.all()
+    return render_to_response('sample.html', {"all_playlists": playlists})
+    #i don't get how to fix this, but i tried to make a new view dedicated to
+    #listing the playlists
+
 
 def playlist(request, playlist_id):
     playlist = Playlist.objects.get(id = playlist_id)
+    playlists = Playlist.objects.all()
     songs = playlist.songs.all()
-    return render_to_response('sample.html', {"all_songs": songs})
+    return render_to_response('sample.html', {"all_songs": songs, "all_playlists": playlists})
+    #playlist info appears on playlist/1/ page but not on sample.html
 
-    #having issues with variable song_ids
-    #ids = db.Song.id #getting ids from id column??
+  
     #for song_id in ids: #looping through ids
         #if not song_id in d['song']: #if the specific song's info hasn't been put into a dictionary yet:
             #song = Song.objects.get(song_id) #get the specific song's info
@@ -39,8 +46,6 @@ def playlist(request, playlist_id):
         #selected_choice.votes += 1
         #selected_choice.save()
         #Always return an HttpResponseRedirect after successfully dealing
-        #with POST data. This prevents data from being posted twice is a
-        #user hits the Back button.
-        #return HttpResponseRedirect(reverse('poll_results', args=(p.id,)))
+        #with POST data.
 
 #https://docs.djangoproject.com/en/dev/intro/tutorial04/#write-a-simple-form

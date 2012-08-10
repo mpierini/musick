@@ -1,0 +1,42 @@
+{% extends "sample.html" %}
+
+{% block content %}
+{% for song in playlist %}
+    <script type="text/javascript">
+    var songs = [
+        {% for song in all_songs %}
+        {
+            "id": {{song.id}},
+            "url": "{{song.url}}"
+        },
+        {% endfor %}
+    ];
+
+    var make_jplayer = function(id, url) {
+        var target = "#jquery_jplayer_" + id;
+        var css_target = "#jp_container_" + id;
+        $(target).jPlayer({
+            ready: function() {
+                $(this).jPlayer("setMedia", { mp3: url });
+            },
+            cssSelectorAncestor: css_target,
+            swfPath: "/static/js",
+            supplied: "mp3",
+            preload: "none",
+        });
+    };
+
+    var main = function() {
+        for (var i = 0; i < songs.length ; i++) {
+            var song = songs[i];
+            make_jplayer( song['id'], song['url'] );
+        }
+    };
+
+    $(document).ready(main);
+    </script>
+{% endfor %}
+
+{% endblock %}
+
+

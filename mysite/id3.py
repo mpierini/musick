@@ -23,7 +23,12 @@ def add_new_file(url):
 	id3r = id3reader.Reader('test.mp3')
 	track_title = id3r.getValue('title')
 	artist_name = id3r.getValue('performer')
-	# artist_name, '-', track_title
+
+	if artist_name == None:
+	    artist_name = "UNKNOWN"
+	if track_title == None:
+	    track_title = "UNKNOWN"
+
 	new_song = models.Song(name = track_title, artist = artist_name, url = url)
 	new_song.save()
 
