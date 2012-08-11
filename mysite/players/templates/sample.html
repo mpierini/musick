@@ -5,14 +5,32 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
 </head>
+
 <body>
+
     <div class="head">
+
+    <div class="user_info">
+        <form name="input" action="user_profile.html" method="get">
+	    <div class="user">
+	       Username: <input type="text" name="user" />
+            </div>
+	    <div class="pword">
+	       Password: <input type="text" name="password" />
+            </div>
+	    <div class="button">
+	        <input type="submit" value="Submit" />
+            </div>
+    </div>
+
     <div class="side"></div>
     <img src = "/static/logo2.png">
     <div class="info-bar"></div>
 
     </div>
-    
+
+    <div class="black"></div>
+    <!--<div class="drippy"><img src="/static/Drippy_Goo_Punch.png"></div>-->
 
     <div class="wrapper">
     <div class="blogroll">
@@ -82,7 +100,9 @@
         <ul>
             <li><h3>Playlists</h3></li>
             {% for playlist in all_playlists %}
+	        <!--{% if user.id == user_id %}-->
                 <li><a href="/playlist/{{playlist.id}}/">{{ playlist.name }}</a></li>
+		<!--{% endif %}-->
             {% endfor %}
     </div>
 

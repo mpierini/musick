@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
-from models import Song, Playlist
+from models import Song, Playlist, Users
 
 def home_view(request):
     return render_to_response("home.html")
@@ -12,19 +12,16 @@ def list_songs(request):
     songs = Song.objects.all().order_by('-id')
     return render_to_response('sample.html', {"all_songs": songs})
 
-def list_playlists(request):
-    playlists = Playlist.objects.all()
-    return render_to_response('sample.html', {"all_playlists": playlists})
-    #i don't get how to fix this, but i tried to make a new view dedicated to
-    #listing the playlists
-
-
 def playlist(request, playlist_id):
     playlist = Playlist.objects.get(id = playlist_id)
     playlists = Playlist.objects.all()
     songs = playlist.songs.all()
     return render_to_response('sample.html', {"all_songs": songs, "all_playlists": playlists})
-    #playlist info appears on playlist/1/ page but not on sample.html
+    #playlist info appears on playlist/playlist_id/ page but not on sample.html
+
+#def user_profile(request, user_id):
+    #user = Users.objects.get(id = user_id)
+    #return render_to_response('sample.html')
 
   
     #for song_id in ids: #looping through ids
