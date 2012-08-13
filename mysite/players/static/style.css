@@ -1,12 +1,11 @@
 body {
-    background-color: black;
+    background-color: silver;
     margin: 0;
     padding: 0;
     font-family: arial black;
 }
 
 div.head {
-    /*background-color: #DCDCDC;*/
     background-color: silver;
     position: fixed;
     top: 0;
@@ -15,20 +14,12 @@ div.head {
     z-index: 100;
 }
 
-div.drippy {
-    z-index: 500;
-    width: 81;
-    height: 432px;
-    bottom: 200px;
-}
-
 div.user_info {
     width: 290px;
     height: 90px;
     right: 0px;
     position: fixed;
     text-shadow: 0.1em 0.1em 0.1em gray;
-    /*text-align: right;*/
     text-align: center;
     background: url('pyramid.png');
     z-index: 1000;
@@ -42,42 +33,30 @@ div.user {
 div.pword {
 }
 
-/*div.side {
-    right: 0px;
-    top: 0;
-    height: 110px;
-    background-color: silver;
-    border-color: #00CCCC;
-    border-width: 10px;
-    border-style: groove;
-    width: 25px;
+div.logo {
+    z-index: 200;
+    height: 160px;
+    width: 280px;
     position: fixed;
-}*/
+    left: 350px;
+    background: url('musick.png');
+}
 
-/*div.info-bar {
-    width: 100%;
-    height: 25px;
-    background: url('pyramid.png');
-    border-width: 10px;
-    z-index: 1000;
-    position: fixed;
-}*/
+div.logo a {
+    display: block;
+    height: 160px;
+    width: 280px;
+}
 
-div.black {
-    width: 100%;
-    background-color: black;
-    top: 130px;
-    height: 28px;
-    z-index: 100;
-    position: fixed;
+div.logo a:hover {
+    background: url('musick2.png') no-repeat;
+    background-position: 2px 0;
 }
 
 div.wrapper {
     min-height: 100%;
     margin-top: 180px;
-    /*background: url('pyramid.png');*/
-    /*background-color: #00CCCCC;*/
-    background-color: black;
+    background-color: silver;
 }
 
 div.playlist-links {
@@ -85,7 +64,7 @@ div.playlist-links {
     margin-right: 0;
     top: 180px;
     width: 180px;
-    height: 395px;
+    height: auto;
     right: 13px;
     position: fixed;
     z-index: 100;
@@ -136,7 +115,7 @@ div.song-list {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
-    background-color: black;
+    background-color: silver;
 }
 
 div.jp-audio {
