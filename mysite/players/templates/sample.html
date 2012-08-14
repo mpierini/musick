@@ -4,6 +4,71 @@
     <link type="text/css" href="/static/skin/jplayer.blue.monday.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
+    <!--Drag and drop functionality-->
+    <script language="JavaScript1.2">
+
+    function createcontainerdiv() {
+        var dragPanel = $('.jp-audio');
+        var dragTarget = $('.song-list');
+
+        // add the container panel
+        var newPanelHeight = dragTarget.outerHeight() * 2 - dragPanel.outerHeight();
+        dragTarget.wrap(document.createElement("div"));
+
+        // set its height and put it in the right place
+        dragTarget.parent().css("height", newPanelHeight);
+        dragTarget.parent().css("position", "relative");
+        var newPanelPosition = ((dragTarget.outerHeight() * -1) / 2);
+        dragTarget.parent().css("top", newPanelPosition);         
+    }
+
+    var ie=document.all;
+    var nn6=document.getElementById&&!document.all;
+
+    var isdrag=false;
+    var x,y;
+    var dobj;
+
+    function movemouse(e)
+    {
+        if (isdrag)
+        {
+            dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
+            dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
+            return false;
+        }
+    }
+
+    function selectmouse(e) 
+    {
+        var fobj = nn6 ? e.target : event.srcElement;
+        var topelement = nn6 ? "HTML" : "BODY";
+
+        while (fobj.tagName != topelement && fobj.className != "jp-audio")
+        {
+            fobj = nn6 ? fobj.parentNode : fobj.parentElement;
+        }
+
+        if (fobj.className=="jp-audio")
+        {
+            isdrag = true;
+            dobj = fobj;
+            tx = parseInt(dobj.style.left+0);
+            ty = parseInt(dobj.style.top+0);
+            x = nn6 ? e.clientX : event.clientX;
+            y = nn6 ? e.clientY : event.clientY;
+            document.onmousemove=movemouse;
+            return false;
+        }
+    }
+    createcontainerdiv()
+    document.onmousedown=selectmouse;
+    document.onmouseup=new Function("isdrag=false");
+
+</script>
+
+
+
 </head>
 
 <body>
@@ -11,6 +76,7 @@
       <div class="user_info">
         {% if request.user.is_authenticated %}
           <a href="{% url logout %}">Log Out</a>
+	  <br />What's up <b style="color:#00CCCC">{{ request.user }}</b> ?!
         {% else %}
         <form name="input" action="{% url login %}" method="post">
           {% csrf_token %}
@@ -29,7 +95,7 @@
     </div>
 
     <div class="logo"><a href="{% url home %}"></a></div>
-
+    <div class="black-bar"></div>
     <div class="wrapper">
     <div class="blogroll">
         <ul>
@@ -47,6 +113,9 @@
 	   <li><a href="http://www.xlr8r.com/mp3">XLR8R</a></li>
         </ul>
     </div>
+
+    <div class="black-box"></div>
+
     <div class="song-list">
 
     {% for song in all_songs %}
@@ -107,8 +176,9 @@
     </div>
 </body>
 
-<script type="text/javascript">
+<!--Making players-->
 
+<script type="text/javascript">
 var songs = [
     {% for song in all_songs %}
     {

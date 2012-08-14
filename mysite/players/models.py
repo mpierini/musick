@@ -4,12 +4,11 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
-# Create your models here.
+
 class Song(models.Model):
     url = models.CharField(max_length=200)
     name = models.CharField(max_length=100)
     artist = models.CharField(max_length=100, default="UNKNOWN")
-    #why this no work???
 
     #blog_name = models.CharField(max_length=100) // link!
     #duration = models.IntegerField(null=False)
@@ -29,12 +28,12 @@ class Playlist(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     url = models.CharField(max_length = 100, blank = True)
-    # name = models.CharField(max_length=100)
-    # password = models.CharField(max_length=8)
-    #do weird salting and hashing thing?
+
+    #avatar = models.ImageField(upload_to='/static/')
+    #having issues with PIL, damn you windows!
     #playlists = models.ManyToManyField(Playlist)
     #they also have songs not in playlists, too? considered one unordered playlist?
-    #account info/avatar pic maybe...
+
     def __unicode__(self):
         return self.user.email
 
