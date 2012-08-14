@@ -1,0 +1,19 @@
+<html>
+<body>
+	<h1>Bad username or password</h1>
+
+	<form name="input" action="{% url login %}" method="post">
+		{% csrf_token %}
+
+	    <div class="user">
+	       Username: <input type="text" name="user" />
+        </div>
+	    <div class="pword">
+	       Password: <input type="password" name="password" />
+     	</div>
+	    <div class="button">
+	        <input type="submit" value="Submit" />
+        </div>
+    </form>
+</body>
+</html>

@@ -7,23 +7,27 @@
 </head>
 
 <body>
-
     <div class="head">
-
     <div class="user_info">
-        <form name="input" action="user_profile.html" method="get">
+      {% if request.user.is_authenticated %}
+      <a href="{% url logout %}">Log Out</a>
+      {% else %}
+      <form name="input" action="{% url login %}" method="post">
+        {% csrf_token %}
 	    <div class="user">
 	       Username: <input type="text" name="user" />
             </div>
 	    <div class="pword">
-	       Password: <input type="text" name="password" />
-            </div>
+	       Password: <input type="password" name="password" />
+      </div>
 	    <div class="button">
 	        <input type="submit" value="Submit" />
             </div>
+      </form>
+      {% endif %}
     </div>
 
-    <div class="logo"><a href="/players/"></a></div>
+    <div class="logo"><a href="{% url home %}"></a></div>
 
     <div class="wrapper">
     <div class="blogroll">
@@ -89,16 +93,16 @@
     {% endfor %}
     </div>
 
+    {% if request.user.is_authenticated %}
     <div class="playlist-links">
         <ul>
             <li><h3>Playlists</h3></li>
             {% for playlist in all_playlists %}
-	        <!--{% if user.id == user_id %}-->
                 <li><a href="/playlist/{{playlist.id}}/">{{ playlist.name }}</a></li>
-		<!--{% endif %}-->
             {% endfor %}
+        </ul>
     </div>
-
+    {% endif %}
     </div>
 </body>
 

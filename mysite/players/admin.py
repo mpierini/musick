@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Song, Playlist
+from models import Song, Playlist, UserProfile
 
 #class SongInLine(admin.TabularInline):
     #model = Song
@@ -35,6 +35,9 @@ from models import Song, Playlist
 
 admin.site.register(Song)
 admin.site.register(Playlist)
+admin.site.register(UserProfile)
+
+
 #admin.site.register(Poll, PollAdmin)
 #You'll follow this pattern -- create a model admin object,
 #then pass it as the second argument to admin.site.register()

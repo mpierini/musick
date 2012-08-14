@@ -1,7 +1,8 @@
 from django.db import models
-
 import datetime 
 from django.utils import timezone 
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Song(models.Model):
@@ -20,15 +21,26 @@ class Song(models.Model):
 class Playlist(models.Model):
     songs = models.ManyToManyField(Song, related_name="+")
     name = models.CharField(max_length=64)
-    user_id = models.IntegerField(null=False)
+    user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.name
 
-class Users(models.Model):
-    name = models.CharField(max_length=100)
-    password = models.CharField(max_length=8)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    url = models.CharField(max_length = 100, blank = True)
+    # name = models.CharField(max_length=100)
+    # password = models.CharField(max_length=8)
     #do weird salting and hashing thing?
     #playlists = models.ManyToManyField(Playlist)
     #they also have songs not in playlists, too? considered one unordered playlist?
     #account info/avatar pic maybe...
+    def __unicode__(self):
+        return self.user.email
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)

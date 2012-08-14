@@ -6,9 +6,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'players.views.home_view', name='home'),
+    url(r'^$', 'players.views.list_songs', name='home'),
+    url(r'^login/$', 'players.views.user_login', name='login'),
+    url(r'^logout/$', 'players.views.user_logout', name='logout'),
+
     # url(r'^mysite/', include('mysite.foo.urls')),
-    url(r'^players/', include('players.urls')),
+    # url(r'^players/', include('players.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:
