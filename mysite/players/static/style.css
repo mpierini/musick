@@ -39,6 +39,7 @@ div.logo {
     width: 280px;
     position: fixed;
     left: 350px;
+    top: 0px;
     background: url('musick.png');
 }
 
