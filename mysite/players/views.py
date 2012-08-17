@@ -54,16 +54,23 @@ def user_logout(request):
     return redirect("home")
 
 def go_register(request):
-    return render_to_response("register.html")
+    return render(request, "register.html")
 
-def add_user(request, password, username, email, url):
+def add_user(request):
     username = request.POST.get("username")
     password = request.POST.get("password")
     email = request.POST.get("email")
     url = request.POST.get("url")
-    user = User.objects.create_user(username=username, password=password, email=email, url=url)
+    user = User.objects.create_user(username=username, password=password, email=email)
+    p = user.get_profile()
+    p.url = url
     user.save()
-    return render(request, "home")
+    p.save()
+
+    user = authenticate(username=username, password=password)
+    login(request, user)
+
+    return redirect("home")
 
 #def user_profile(request, user_id):
     #user = Users.objects.get(id = user_id)

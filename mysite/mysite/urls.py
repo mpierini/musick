@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^login/$', 'players.views.user_login', name='login'),
     url(r'^logout/$', 'players.views.user_logout', name='logout'),
     url(r'^register/$', 'players.views.go_register', name='register'),
+    url(r'^add_user/$', 'players.views.add_user', name='add_user'),
 
     # url(r'^mysite/', include('mysite.foo.urls')),
     # url(r'^players/', include('players.urls')),
