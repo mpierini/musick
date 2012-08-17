@@ -1,0 +1,29 @@
+<html>
+<link rel=stylesheet href="/static/style.css" type="text/css">
+<body>
+    <h1 style="text-align: center">Sign up to start making playlists!</h1>
+
+    <div class="form">
+    <form name="input" method="post">
+        {% csrf_token %}
+	 <div class="username">
+	     Username: <input type="text" name="username" />
+	 </div>
+	 <div class="password">
+	    Password: <input type="password" name="password" />
+	</div>
+	<div class="email">
+	    Email: <input type="text" name="email" />
+	</div>
+	<div class="url">
+	    Website: <input type="text" name="url" />
+	</div>
+	<div class="button">
+	    <input type="submit" value="Submit" />
+     </form>
+     </div>
+
+	<a href="/">GO BACK HOME!!!!!</a>
+
+</body>
+</html>

@@ -6,10 +6,10 @@
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
     <!--Drag and drop functionality-->
     <script language="JavaScript1.2">
-
+    <!--first part doesn't do what i think/want it to...-->
     function createcontainerdiv() {
         var dragPanel = $('.jp-audio');
-        var dragTarget = $('.song-list');
+        var dragTarget = $('.black-box');
 
         // add the container panel
         var newPanelHeight = dragTarget.outerHeight() * 2 - dragPanel.outerHeight();
@@ -90,6 +90,7 @@
             <input type="submit" value="Submit" />
           </div>
         </form>
+	<div class="register">Sign up <a href="register">here</a>!</div>
         {% endif %}
       </div>
     </div>
@@ -110,7 +111,7 @@
 	   <li><a href="http://www.fluxblog.org/">Fluxblog</a></li>
 	   <li><a href="http://www.undertheradarmag.com/media/">Under the Radar</a></li>
 	   <li><a href="http://www.mustard-relics.com/">Mustard Relics</a></li>
-	   <li><a href="http://www.xlr8r.com/mp3">XLR8R</a></li>
+	   <li><a href="h:ttp://www.xlr8r.com/mp3">XLR8R</a></li>
         </ul>
     </div>
 
@@ -119,6 +120,8 @@
     <div class="song-list">
 
     {% for song in all_songs %}
+    <!--all_songs % 20-->
+    {% if song.id < 21 %}
       <div id="jquery_jplayer_{{song.id}}" class="jp-jplayer"></div>
         <div id="jp_container_{{song.id}}" class="jp-audio">
           <div class="jp-type-single">
@@ -160,8 +163,11 @@
       </div>
     </div>
 
+    {% endif %}
     {% endfor %}
     </div>
+    
+    <div class="next"><a href="/next/{{ page.id }}/">Next Page</a></div>
 
     {% if request.user.is_authenticated %}
     <div class="playlist-links">

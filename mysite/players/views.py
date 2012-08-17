@@ -5,6 +5,7 @@ from django.template import RequestContext
 from models import Song, Playlist, User
 import random
 from django.contrib.auth import authenticate, login, logout
+from django.core.context_processors import csrf
 
 
 def home_view(request):
@@ -49,6 +50,15 @@ def user_logout(request):
     logout(request)
     return redirect("home")
 
+def go_register(request):
+    return render_to_response("register.html")
+
+def add_user(request, password, username, email, url):
+    c = {}
+    c.update(csrf(request))
+    user = User.objects.create_user(username=username, password=password, email=email, url=url)
+    user.save()
+    return render_to_response(request, "home", c)
 
 #def user_profile(request, user_id):
     #user = Users.objects.get(id = user_id)

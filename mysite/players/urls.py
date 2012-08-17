@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^mysite/', include('mysite.foo.urls')),
     
     url(r'^$', 'players.views.list_songs'),    
-   
+    url(r'^$', 'players.views.go_register'),
 )                       
 
     # Uncomment the admin/doc line below to enable admin documentation:
