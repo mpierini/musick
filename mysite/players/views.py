@@ -16,8 +16,11 @@ def list_songs(request):
         playlists = request.user.playlist_set.all()
     else:
         playlists = []
-
     songs = Song.objects.all().order_by('-id')
+    #page_num = songs / 20
+    #if songs % 20 != 0:
+        #page_num += 1
+    #print page_num
     return render(request, 'sample.html', {"all_songs": songs,
         "all_playlists": playlists})
 
@@ -54,11 +57,13 @@ def go_register(request):
     return render_to_response("register.html")
 
 def add_user(request, password, username, email, url):
-    c = {}
-    c.update(csrf(request))
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    email = request.POST.get("email")
+    url = request.POST.get("url")
     user = User.objects.create_user(username=username, password=password, email=email, url=url)
     user.save()
-    return render_to_response(request, "home", c)
+    return render(request, "home")
 
 #def user_profile(request, user_id):
     #user = Users.objects.get(id = user_id)
