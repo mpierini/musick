@@ -5,8 +5,9 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
     <!--Drag and drop functionality-->
-    <script language="JavaScript1.2">
+
     <!--first part doesn't do what i think/want it to...-->
+    <script language="JavaScript1.2">
     function createcontainerdiv() {
         var dragPanel = $('.jp-audio');
         var dragTarget = $('.black-box');
@@ -96,7 +97,7 @@
     </div>
 
     <div class="logo"><a href="{% url home %}"></a></div>
-    <div class="black-bar"></div>
+<!--    <div class="black-bar"></div> -->
     <div class="wrapper">
     <div class="blogroll">
         <ul>
@@ -115,56 +116,58 @@
         </ul>
     </div>
 
-    <div class="black-box"></div>
+    <div class="black-box">
+        <div id="black-bar"></div>
+        <div class="song-list">
 
-    <div class="song-list">
-
-    {% for song in all_songs %}
-    <!--all_songs % 20-->
-    {% if song.id < 21 %}
-      <div id="jquery_jplayer_{{song.id}}" class="jp-jplayer"></div>
-        <div id="jp_container_{{song.id}}" class="jp-audio">
-          <div class="jp-type-single">
-            <div class="jp-gui jp-interface">
-              <ul class="jp-controls">
-                <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-                <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-                <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-                <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-                <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
-                <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
-              </ul>
-            <div class="jp-progress">
-              <div class="jp-seek-bar">
-                <div class="jp-play-bar"></div>
+        {% for song in all_songs %}
+        <!--all_songs % 20-->
+        {% if song.id < 21 %}
+          <div id="jquery_jplayer_{{song.id}}" class="jp-jplayer"></div>
+            <div id="jp_container_{{song.id}}" class="jp-audio">
+              <div class="jp-type-single">
+                <div class="jp-gui jp-interface">
+                  <ul class="jp-controls">
+                    <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                    <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                    <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                    <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                  </ul>
+                <div class="jp-progress">
+                  <div class="jp-seek-bar">
+                    <div class="jp-play-bar"></div>
+                  </div>
+                </div>
+              <div class="jp-volume-bar">
+                <div class="jp-volume-bar-value"></div>
+              </div>
+              <div class="jp-time-holder">
+                <div class="jp-current-time"></div>
+                <div class="jp-duration"></div>
+                 <ul class="jp-toggles">
+                   <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+                   <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+                 </ul>
               </div>
             </div>
-          <div class="jp-volume-bar">
-            <div class="jp-volume-bar-value"></div>
+            <div class="jp-title">
+              <ul>
+                <li>{{ song.artist }} :: {{ song.name }}</li>
+              </ul>
+            </div>
+            <div class="jp-no-solution">
+              <span>Update Required</span>
+              To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+            </div>
           </div>
-          <div class="jp-time-holder">
-            <div class="jp-current-time"></div>
-            <div class="jp-duration"></div>
-             <ul class="jp-toggles">
-               <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
-               <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
-             </ul>
-          </div>
         </div>
-        <div class="jp-title">
-          <ul>
-            <li>{{ song.artist }} :: {{ song.name }}</li>
-          </ul>
-        </div>
-        <div class="jp-no-solution">
-          <span>Update Required</span>
-          To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-        </div>
-      </div>
-    </div>
 
-    {% endif %}
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
+        </div>
+
     </div>
     
     <div class="next"><a href="/next/{{ page.id }}/">Next Page</a></div>
