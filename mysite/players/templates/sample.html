@@ -4,6 +4,7 @@
     <link type="text/css" href="/static/skin/jplayer.blue.monday.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
+
     <!--Drag and drop functionality-->
 
     <!--first part doesn't do what i think/want it to...-->
@@ -117,14 +118,10 @@
     </div>
 
     <div class="black-box">
-        <div id="black-bar"></div>
-        <div class="song-list">
-
-        {% for song in all_songs %}
-        <!--all_songs % 20-->
-        {% if song.id < 21 %}
-          <div id="jquery_jplayer_{{song.id}}" class="jp-jplayer"></div>
-            <div id="jp_container_{{song.id}}" class="jp-audio">
+        <div id="black-bar">
+      <!-- player start -->
+          <div id="jquery_jplayer" class="jp-jplayer"></div>
+            <div id="jp_container" class="jp-audio">
               <div class="jp-type-single">
                 <div class="jp-gui jp-interface">
                   <ul class="jp-controls">
@@ -154,7 +151,7 @@
             </div>
             <div class="jp-title">
               <ul>
-                <li>{{ song.artist }} :: {{ song.name }}</li>
+                <li>{{ first_song.artist }} :: {{ first_song.name }}</li>
               </ul>
             </div>
             <div class="jp-no-solution">
@@ -163,9 +160,11 @@
             </div>
           </div>
         </div>
-
-        {% endif %}
-        {% endfor %}
+        <!-- player ends -->
+        </div>
+      
+        <div id="songlist">
+        </div>
         </div>
 
     </div>
@@ -188,34 +187,90 @@
 <!--Making players-->
 
 <script type="text/javascript">
-var songs = [
-    {% for song in all_songs %}
-    {
-     "id": {{song.id}},
-     "url": "{{song.url}}"
-    },
-    {% endfor %}
-];
+var songs = {{json_songs|safe}};
+var player = null;
 
-var make_jplayer = function(id, url) {
-    var target = "#jquery_jplayer_" + id;
-    var css_target = "#jp_container_" + id;
+var set_title = function(artist, song_name) {
+    $("div.jp-title ul li").text(artist + " :: " + song_name);
+};
+
+var current_song = 0;
+
+var load_song = function(song) {
+    console.log(song);
+    set_title(song.fields.artist, song.fields.name);
+    player.jPlayer("setMedia", {"mp3": song.fields.url });
+    player.jPlayer("play");
+};
+
+var play_next = function() {
+    if (current_song == songs.length-1) {
+        return;
+    }
+    else {
+        current_song++;
+        load_song(songs[current_song]);
+    }
+};
+
+var make_song_div = function(song, track_order) {
+    var container = $("<div>");
+    container.addClass("song");
+    container.attr("track_order", track_order);
+    var name = $("<div>");
+    name.text(song.fields.name);
+    name.addClass("name");
+
+    var artist = $("<div>");
+    artist.text(song.fields.artist);
+    artist.addClass("artist");
+
+    var playbutton = $("<a href=''>");
+    playbutton.text("Play");
+
+    var play_fn = function() {
+        load_song(song);
+        current_song = track_order;
+        return false;
+    }
+
+    playbutton.click(play_fn);
+    
+    container.append(name);
+    container.append(artist);
+    container.append(playbutton);
+
+    $("div#songlist").append(container);    
+};
+
+var preload_player = function() {
+    var target = "#jquery_jplayer";
+    var css_target = "#jp_container";
+
     $(target).jPlayer({
         ready: function() {
-            $(this).jPlayer("setMedia", { mp3: url });
+            var first_song = songs[0];
+            player = $(this);
+            player.jPlayer("setMedia", {"mp3": songs[0].fields.url})
+            set_title(first_song.fields.artist, first_song.fields.name);
         },
+        ended: play_next,
         cssSelectorAncestor: css_target,
         swfPath: "/static/js",
         supplied: "mp3",
         preload: "none",
+        errorAlerts: true,
+        warningAlerts: false
     });
+
+    for (var i = 0; i < songs.length; i++) {
+        make_song_div(songs[i], i);
+    }
 };
 
+
 var main = function() {
-    for (var i = 0; i < songs.length ; i++) {
-        var song = songs[i];
-        make_jplayer( song['id'], song['url'] );
-    }
+    preload_player();
 };
 
 $(document).ready(main);

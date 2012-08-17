@@ -6,6 +6,7 @@ from models import Song, Playlist, User
 import random
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
+from django.core import serializers
 
 
 def home_view(request):
@@ -16,13 +17,17 @@ def list_songs(request):
         playlists = request.user.playlist_set.all()
     else:
         playlists = []
-    songs = Song.objects.all().order_by('-id')
+    songs = Song.objects.order_by('id').all();
+    first_song = songs[0]
+
+    json_songs = serializers.serialize("json", songs)
     #page_num = songs / 20
     #if songs % 20 != 0:
         #page_num += 1
     #print page_num
-    return render(request, 'sample.html', {"all_songs": songs,
-        "all_playlists": playlists})
+    return render(request, 'sample.html', { "json_songs": json_songs,
+                                            "first_song": first_song,
+                                            "all_playlists": playlists})
 
 def playlist(request, playlist_id):
     playlist = Playlist.objects.get(id = playlist_id)
