@@ -46,12 +46,12 @@
         var fobj = nn6 ? e.target : event.srcElement;
         var topelement = nn6 ? "HTML" : "BODY";
 
-        while (fobj.tagName != topelement && fobj.className != "jp-audio")
+        while (fobj.tagName != topelement && fobj.className != "song")
         {
             fobj = nn6 ? fobj.parentNode : fobj.parentElement;
         }
 
-        if (fobj.className=="jp-audio")
+        if (fobj.className=="song")
         {
             isdrag = true;
             dobj = fobj;
@@ -68,8 +68,6 @@
     document.onmouseup=new Function("isdrag=false");
 
 </script>
-
-
 
 </head>
 
@@ -96,7 +94,11 @@
         {% endif %}
       </div>
     </div>
-
+    {% if request.user.is_authenticated %}
+    <div class="playlist">
+        Make a <a href="new">new playlist</a>!
+    </div>
+    {% endif %}
     <div class="logo"><a href="{% url home %}"></a></div>
 <!--    <div class="black-bar"></div> -->
     <div class="wrapper">
@@ -164,8 +166,17 @@
         </div>
       
         <div id="songlist">
+        {% if request.user.is_authenticated %}
+        <div class="select">
+            {% for song in all_songs %}
+            <form>
+                <input type="checkbox" name="select" value="select" /> add
+            </form>
+            {% endfor %}
         </div>
+        {% endif %}
         </div>
+        
 
     </div>
     
@@ -217,13 +228,14 @@ var make_song_div = function(song, track_order) {
     var container = $("<div>");
     container.addClass("song");
     container.attr("track_order", track_order);
-    var name = $("<div>");
-    name.text(song.fields.name);
-    name.addClass("name");
 
     var artist = $("<div>");
     artist.text(song.fields.artist);
     artist.addClass("artist");
+
+    var name = $("<div>");
+    name.text(song.fields.name);
+    name.addClass("name");
 
     var playbutton = $("<a href=''>");
     playbutton.text("Play");
@@ -231,17 +243,22 @@ var make_song_div = function(song, track_order) {
     var play_fn = function() {
         load_song(song);
         current_song = track_order;
+        load_song(song);
         return false;
     }
 
     playbutton.click(play_fn);
     
-    container.append(name);
     container.append(artist);
+    container.append(name);
     container.append(playbutton);
+    
 
     $("div#songlist").append(container);    
 };
+
+
+
 
 var preload_player = function() {
     var target = "#jquery_jplayer";
@@ -259,7 +276,7 @@ var preload_player = function() {
         swfPath: "/static/js",
         supplied: "mp3",
         preload: "none",
-        errorAlerts: true,
+        errorAlerts: false,
         warningAlerts: false
     });
 

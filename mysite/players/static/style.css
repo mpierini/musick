@@ -120,11 +120,12 @@ div#black-bar {
     width: 525px;
     position: fixed;
     background-color: black;
-    height: 130px;
+    height: 135px;
     margin-top: -30px;
     z-index: 1001;
     padding-top: 15px;
 }
+
 div.black-box {
     width: 525px;
     min-height: 100%;
@@ -136,9 +137,9 @@ div.black-box {
 }
 
 div#songlist {
-    width: 500px;
+    width: 300px;
     margin-top: 125px;
-    background-color: white;
+    background: url('pyramid.png');
     margin-left: auto;
     margin-right: auto;
 }
@@ -146,6 +147,13 @@ div#songlist {
 div.song {
     border-bottom: dotted 1px black;
     margin-bottom: 7px;
+    text-align: center;
+    position: relative;
+    background-color: white;
+}
+
+div.name {
+    color: gray;
 }
 
 div.jp-audio {
@@ -184,4 +192,21 @@ div.next {
     height: 20px;
     position fixed;
     padding-left: 775px;
+}
+
+div.select {
+    color: white;
+    height: 100%;
+    width: 100px;
+    position: absolute;
+    right: 0px;
+    top: 180px;
+    padding-bottom: 50px;
+}
+
+div.playlist {
+    width: 180px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
 }

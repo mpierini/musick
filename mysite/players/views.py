@@ -17,7 +17,7 @@ def list_songs(request):
         playlists = request.user.playlist_set.all()
     else:
         playlists = []
-    songs = Song.objects.order_by('id').all();
+    songs = Song.objects.order_by('-id').all();
     first_song = songs[0]
 
     json_songs = serializers.serialize("json", songs)
@@ -26,6 +26,7 @@ def list_songs(request):
         #page_num += 1
     #print page_num
     return render(request, 'sample.html', { "json_songs": json_songs,
+                                            "all_songs": songs,
                                             "first_song": first_song,
                                             "all_playlists": playlists})
 
@@ -36,7 +37,20 @@ def playlist(request, playlist_id):
     else:
         playlists = []
     songs = playlist.songs.all()
-    return render(request, 'sample.html', {"all_songs": songs, "all_playlists": playlists})
+    json_songs = serializers.serialize("json", songs)
+    return render(request, 'sample.html', { "json_songs": json_songs,
+                                            "all_songs": songs, 
+					    "all_playlists": playlists})
+#def create_playlist(request):
+    #user = request.user.name
+    #whoever is logged in is the user
+    #name = request.POST.get(name)
+    #need an input form for name
+    #songs = request.POST.get(songs)
+    #songs needs to equal the songs that they have chosen somehow
+    #a list of song objects?
+    #playlist = Playlist.objects.create(name=name, user=user, songs=songs)
+    #return render(request, 'sample.html')
     
 
 def user_login(request):
