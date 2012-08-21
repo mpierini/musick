@@ -4,71 +4,9 @@
     <link type="text/css" href="/static/skin/jplayer.blue.monday.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.jplayer.min.js"></script>
-
-    <!--Drag and drop functionality-->
-
-    <!--first part doesn't do what i think/want it to...-->
-    <script language="JavaScript1.2">
-    function createcontainerdiv() {
-        var dragPanel = $('.jp-audio');
-        var dragTarget = $('.black-box');
-
-        // add the container panel
-        var newPanelHeight = dragTarget.outerHeight() * 2 - dragPanel.outerHeight();
-        dragTarget.wrap(document.createElement("div"));
-
-        // set its height and put it in the right place
-        dragTarget.parent().css("height", newPanelHeight);
-        dragTarget.parent().css("position", "relative");
-        var newPanelPosition = ((dragTarget.outerHeight() * -1) / 2);
-        dragTarget.parent().css("top", newPanelPosition);         
-    }
-
-    var ie=document.all;
-    var nn6=document.getElementById&&!document.all;
-
-    var isdrag=false;
-    var x,y;
-    var dobj;
-
-    function movemouse(e)
-    {
-        if (isdrag)
-        {
-            dobj.style.left = nn6 ? tx + e.clientX - x : tx + event.clientX - x;
-            dobj.style.top  = nn6 ? ty + e.clientY - y : ty + event.clientY - y;
-            return false;
-        }
-    }
-
-    function selectmouse(e) 
-    {
-        var fobj = nn6 ? e.target : event.srcElement;
-        var topelement = nn6 ? "HTML" : "BODY";
-
-        while (fobj.tagName != topelement && fobj.className != "song")
-        {
-            fobj = nn6 ? fobj.parentNode : fobj.parentElement;
-        }
-
-        if (fobj.className=="song")
-        {
-            isdrag = true;
-            dobj = fobj;
-            tx = parseInt(dobj.style.left+0);
-            ty = parseInt(dobj.style.top+0);
-            x = nn6 ? e.clientX : event.clientX;
-            y = nn6 ? e.clientY : event.clientY;
-            document.onmousemove=movemouse;
-            return false;
-        }
-    }
-    createcontainerdiv()
-    document.onmousedown=selectmouse;
-    document.onmouseup=new Function("isdrag=false");
-
-</script>
-
+    <!--Draggable jquery UI shit-->
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -227,6 +165,7 @@ var play_next = function() {
 var make_song_div = function(song, track_order) {
     var container = $("<div>");
     container.addClass("song");
+    $(".song").draggable({ snap: true, containment: "parent", zIndex: 100});
     container.attr("track_order", track_order);
 
     var artist = $("<div>");
@@ -291,5 +230,6 @@ var main = function() {
 };
 
 $(document).ready(main);
+
 </script>
 </html>
