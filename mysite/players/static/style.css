@@ -146,19 +146,21 @@ div.black-box {
     position: relative;
 }
 
-div#songlist {
+ul#songlist {
     width: 300px;
     margin-top: 125px;
     background: url('pyramid.png');
+    padding: 0;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto;   
+    list-style-type: none;
+
 }
 
-div.song {
+li.song {
+    display: block;
     border-bottom: dotted 1px black;
-    margin-bottom: 7px;
     text-align: center;
-    position: relative;
     background-color: white;
 }
 

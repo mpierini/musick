@@ -109,17 +109,8 @@
         <!-- player ends -->
         </div>
       
-        <div id="songlist">
-        {% if request.user.is_authenticated %}
-        <div class="select">
-            {% for song in all_songs %}
-            <form>
-                <input type="checkbox" name="select" value="select" /> add
-            </form>
-            {% endfor %}
-        </div>
-        {% endif %}
-        </div>
+        <ul id="songlist">
+        </ul>
         
 
     </div>
@@ -149,7 +140,7 @@ var set_title = function(artist, song_name) {
     $("div.jp-title ul li").text(artist + " :: " + song_name);
 };
 
-var current_song = 0;
+var current_song = null;
 
 var load_song = function(song) {
     console.log(song);
@@ -159,19 +150,19 @@ var load_song = function(song) {
 };
 
 var play_next = function() {
-    if (current_song == songs.length-1) {
+    if (current_song.el.index() == songs.length-1) {
         return;
     }
     else {
-        current_song++;
-        load_song(songs[current_song]);
+        load_song(songs[current_song.el.index()+1]);
     }
 };
 
 var make_song_div = function(song, track_order) {
-    var container = $("<div>");
+    var container = $("<li>");
+    song['el'] = container;
     container.addClass("song");
-    $(".song").draggable({ snap: true, containment: "parent", zIndex: 100});
+    //container.draggable({ snap: true, containment: "parent", zIndex: 100});
     container.attr("track_order", track_order);
 
     var artist = $("<div>");
@@ -187,7 +178,7 @@ var make_song_div = function(song, track_order) {
 
     var play_fn = function() {
         load_song(song);
-        current_song = track_order;
+        current_song = song;
         load_song(song);
         return false;
     }
@@ -199,10 +190,27 @@ var make_song_div = function(song, track_order) {
     container.append(playbutton);
     
 
-    $("div#songlist").append(container);    
+    $("ul#songlist").append(container);    
 };
 
 
+var move_song = function(start, end) {
+    moving_song = songs[start];
+    if (start < end) {
+        for (var i = start; i < end; i++) {
+            songs[i] = songs[i+1];
+            songs[i].el.attr("track_order", i);
+        }
+    } else {
+        for (var i = start; i > end; i--) {
+            songs[i] = songs[i-1];
+            songs[i].el.attr("track_order", i);
+
+        }    
+    }
+    songs[end] = moving_song;
+    moving_song.el.attr("track_order", end);
+}
 
 
 var preload_player = function() {
@@ -212,6 +220,7 @@ var preload_player = function() {
     $(target).jPlayer({
         ready: function() {
             var first_song = songs[0];
+            current_song = first_song;
             player = $(this);
             player.jPlayer("setMedia", {"mp3": songs[0].fields.url})
             set_title(first_song.fields.artist, first_song.fields.name);
@@ -231,8 +240,17 @@ var preload_player = function() {
 };
 
 
+var sortsongs = function(evt, ui_evt) {
+    new_pos = ui_evt.item.index();
+    old_pos = Number(ui_evt.item.attr("track_order"));
+    move_song(old_pos, new_pos);
+};
+
 var main = function() {
     preload_player();
+    $("#songlist").sortable(
+    {"stop": sortsongs});
+    $("#songlist").disableSelection();
 };
 
 $(document).ready(main);
