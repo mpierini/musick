@@ -9,30 +9,42 @@ from django.core.context_processors import csrf
 from django.core import serializers
 import re
 from django.db.models import Q
+import operator
 
 
 def home_view(request):
     return render_to_response("home.html")
 
 def list_songs(request):
+    keywords = request.GET.get('keywords').strip()
+    print keywords
+
     if request.user.is_authenticated():
         playlists = request.user.playlist_set.all()
     else:
         playlists = []
-    songs = Song.objects.order_by('-id').all();
-    first_song = songs[0]
+    song_query = Song.objects
+    "select * from Song;"
+    songs_query = song_query.order_by("-id")
+    "select * from Song order by id desc;"
+    
+    if keywords:
+        individual_words = keywords.split()
+        q = Q() 	
+        for word in individual_words:
+            q = operator.or_(q, Q(name__icontains = word))	
+            q = operator.or_(q, Q(artist__icontains = word))
+            songs_query = songs_query.filter(q)
+		
+    songs = songs_query.all();
 
     json_songs = serializers.serialize("json", songs)
-    #page_num = songs / 20
-    #if songs % 20 != 0:
-        #page_num += 1
-    #print page_num
     return render(request, 'sample.html', { "json_songs": json_songs,
                                             "all_songs": songs,
-                                            "first_song": first_song,
                                             "all_playlists": playlists})
 
 def playlist(request, playlist_id):
+    print "2"
     playlist = Playlist.objects.get(id = playlist_id)
     if request.user.is_authenticated():
         playlists = request.user.playlist_set.all()

@@ -39,11 +39,11 @@
     {% endif %}
     <div class="logo"><a href="{% url home %}"></a></div>
     <div class="search">
-        <form action="search" method="get">
-	    <label for="query"> Search:</label>
-	         <input id="query" name="keywords" type="text">
-		 <input type="submit" value="Submit">
-	</form>
+        <form method="get">
+	    	<label for="query"> Search:</label>
+	        <input id="query" name="keywords" type="text" value="{{ request.GET.keywords }}">
+		 	<input type="submit" value="Submit">
+		</form>
     </div>
     <div class="wrapper">
     <div class="blogroll">
@@ -97,7 +97,7 @@
             </div>
             <div class="jp-title">
               <ul>
-                <li>{{ first_song.artist }} :: {{ first_song.name }}</li>
+                <li></li>
               </ul>
             </div>
             <div class="jp-no-solution">
