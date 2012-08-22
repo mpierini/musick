@@ -7,6 +7,8 @@ import random
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
 from django.core import serializers
+import re
+from django.db.models import Q
 
 
 def home_view(request):
@@ -51,6 +53,20 @@ def playlist(request, playlist_id):
     #a list of song objects?
     #playlist = Playlist.objects.create(name=name, user=user, songs=songs)
     #return render(request, 'sample.html')
+
+def go_search(request):
+    return render(request, 'search.html')
+
+#def search_keywords(songs, keywords):
+    #if isinstance(keywords, str):
+        #keywords=[keywords]
+    #if not isinstance(keywords, list):
+        #return None
+    #list_songname_qs = [Q(name__icontains=x) for x in keywords]
+    #list_artist_qs= [Q(artist__icontains=x) for x in keywords]
+    #final_q = reduce(operator.or_, list_artist_qs + list_songname_qs)
+    #r_qs = songs.filter(final_q)
+    #return r_qs
     
 
 def user_login(request):
