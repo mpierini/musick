@@ -118,6 +118,8 @@
     <div class="next"><a href="/next/{{ page.id }}/">Next Page</a></div>
 
     {% if request.user.is_authenticated %}
+    {% if request.user.playlist_set.all %}
+    
     <div class="playlist-links">
         <ul>
             <li><h3>Playlists</h3></li>
@@ -126,6 +128,7 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
     {% endif %}
     </div>
 </body>
@@ -143,7 +146,6 @@ var set_title = function(artist, song_name) {
 var current_song = null;
 
 var load_song = function(song) {
-    console.log(song);
     set_title(song.fields.artist, song.fields.name);
     player.jPlayer("setMedia", {"mp3": song.fields.url });
     player.jPlayer("play");
@@ -154,7 +156,9 @@ var play_next = function() {
         return;
     }
     else {
-        load_song(songs[current_song.el.index()+1]);
+        for (var i = 0; i < songs.length; i++) {
+            load_song(songs[current_song.el.index()+1]);
+	}
     }
 };
 

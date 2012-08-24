@@ -23,8 +23,10 @@ div.user_info {
     text-align: center;
     background: url('pyramid.png');
     z-index: 1000;
-    border-style: groove;
+    border-style: solid;
+    border-color: white;
     border-radius: 15px;
+    box-shadow: 10px 10px 5px black;
 }
 
 div.logo {
@@ -34,7 +36,7 @@ div.logo {
     position: fixed;
     left: 350px;
     top: 0px;
-    background: url('musick.png');
+    background: url('musickNSE3.png');
 }
 
 div.logo a {
@@ -65,9 +67,11 @@ div.playlist-links {
     z-index: 100;
     border-radius: 15px;
     border: 5px;
-    border-style: groove;
+    border-style: solid;
+    border-color: white;
     background: url('pyramid.png');
     text-shadow: 0.1em 0.1em 0.1em gray;
+    box-shadow: 10px 10px 5px black;
 }
 
 a:link {
@@ -90,6 +94,10 @@ div.search {
     height: 75px;
     top: 80px;
     left: 0px;
+    background-color: black;
+    color: white;
+    border: 1px gray;
+    border-style: solid;
     position: fixed;
     z-index: 100;
 }
@@ -105,9 +113,11 @@ div.blogroll {
     z-index: 100;
     border-radius: 15px;
     border: 5px;
-    border-style: groove;
+    border-style: solid;
     background: url('pyramid.png');
+    border-color: white;
     text-shadow: 0.1em 0.1em 0.1em gray;
+    box-shadow: 10px 10px 5px gray;
 }
 
 ul {
@@ -149,7 +159,8 @@ div.black-box {
 ul#songlist {
     width: 300px;
     margin-top: 125px;
-    background: url('pyramid.png');
+    /*background: url('pyramid.png');*/
+    background-color: #00FFCC;
     padding: 0;
     margin-left: auto;
     margin-right: auto;   
@@ -221,4 +232,6 @@ div.playlist {
     position: fixed;
     z-index: 1000;
     top: 0;
+    background-color: black;
+    color: white;
 }

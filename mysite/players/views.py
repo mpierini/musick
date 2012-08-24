@@ -16,7 +16,8 @@ def home_view(request):
     return render_to_response("home.html")
 
 def list_songs(request):
-    keywords = request.GET.get('keywords').strip()
+    keywords = request.GET.get('keywords')
+    #previous statement used to end in " .strip() "
     print keywords
 
     if request.user.is_authenticated():
@@ -44,7 +45,6 @@ def list_songs(request):
                                             "all_playlists": playlists})
 
 def playlist(request, playlist_id):
-    print "2"
     playlist = Playlist.objects.get(id = playlist_id)
     if request.user.is_authenticated():
         playlists = request.user.playlist_set.all()
@@ -55,6 +55,10 @@ def playlist(request, playlist_id):
     return render(request, 'sample.html', { "json_songs": json_songs,
                                             "all_songs": songs, 
 					    "all_playlists": playlists})
+
+def make_playlist(request):
+    return render(request, 'sample.html')
+
 #def create_playlist(request):
     #user = request.user.name
     #whoever is logged in is the user

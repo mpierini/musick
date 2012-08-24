@@ -28,9 +28,9 @@ class Playlist(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     url = models.CharField(max_length = 100, blank = True)
-
     #avatar = models.ImageField(upload_to='/static/')
     #having issues with PIL, damn you windows!
+
     #playlists = models.ManyToManyField(Playlist)
     #they also have songs not in playlists, too? considered one unordered playlist?
 

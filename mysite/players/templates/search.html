@@ -1,0 +1,21 @@
+<html>
+<link rel=stylesheet href="/static/style.css" type="text/css">
+<body>
+    <h1 style="text-align: center"> Search results:</h1>
+        {% if query != None %}
+	    <div class="success" style="text-align: center">
+	        You searched for "{{ keywords }}" and here's what you got>>
+	        {% for item in query %}
+	            <li>{{ item }}</li> <!-- in a list item thing? -->
+	        {% endfor %}
+	    </div>
+	{% else %}{% if query == None %}
+	    <div class="error" style="text-align: center">
+	        Sorry, bro! Can't find what you're looking for...
+	    </div>
+	{% endif %}{% endif %}
+	<div class="back" style="text-align: center">
+	    <a href="/">GO BACK HOME!!!!!</a>
+	</div>
+</body>
+</html>

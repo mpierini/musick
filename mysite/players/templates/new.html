@@ -1,0 +1,12 @@
+{% extends "sample.html" %}
+
+{% block content %}
+
+<div class="select">
+{% for song in json_songs %}
+    <form>
+        <input type="checkbox" name="add" value="add" />add
+    {% endfor %}
+        <input type="submit" value="Submit" />
+    </form>
+</div>
