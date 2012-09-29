@@ -9,7 +9,7 @@ setup_environ(settings)
 
 
 
-sample_url = "http://www.moteldemoka.com/moka/somethinggood.mp3"
+# sample_url = "http://www.moteldemoka.com/moka/somethinggood.mp3"
 # mp3 = urllib.urlopen('http://www.moteldemoka.com/moka/somethinggood.mp3')
 
 def add_new_file(url):

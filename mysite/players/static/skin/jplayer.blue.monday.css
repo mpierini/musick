@@ -140,6 +140,7 @@ a.jp-pause {
 a.jp-play {
 	background: url("jplayer.blue.monday.jpg") 0 0 no-repeat;
 }
+
 a.jp-play:hover {
 	background: url("jplayer.blue.monday.jpg") -41px 0 no-repeat;
 }

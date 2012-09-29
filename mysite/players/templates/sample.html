@@ -1,5 +1,6 @@
 <html>
 <head>
+    <title>Streaming MUSICKs For You!</title>
     <link rel=stylesheet type=text/css href="/static/style.css">
     <link type="text/css" href="/static/skin/jplayer.blue.monday.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
@@ -19,16 +20,16 @@
         <form name="input" action="{% url login %}" method="post">
           {% csrf_token %}
           <div class="user">
-            Username: <input type="text" name="user" />
+            Username: <input type="text" name="user" style="background:black; color:white; font-weight:bold" />
           </div>
     	    <div class="pword">
-            Password: <input type="password" name="password" />
+            Password: &nbsp;<input type="password" name="password" style="background:black; color:white" />
           </div>
           <div class="button">
             <input type="submit" value="Submit" />
           </div>
         </form>
-	<div class="register">Sign up <a href="register">here</a>!</div>
+	<!--<div class="register">Sign up <a href="register">here</a>!</div>-->
         {% endif %}
       </div>
     </div>
@@ -41,7 +42,7 @@
     <div class="search">
         <form method="get">
 	    	<label for="query"> Search:</label>
-	        <input id="query" name="keywords" type="text" value="{{ request.GET.keywords }}">
+	        <input id="query" name="keywords" type="text" value="{{ request.GET.keywords }}" style="font-weight:bold">
 		 	<input type="submit" value="Submit">
 		</form>
     </div>
@@ -115,7 +116,7 @@
 
     </div>
     
-    <div class="next"><a href="/next/{{ page.id }}/">Next Page</a></div>
+    <!--<div class="next"><a href="/next/{{ page.id }}/">Next Page</a></div>-->
 
     {% if request.user.is_authenticated %}
     {% if request.user.playlist_set.all %}
@@ -151,7 +152,7 @@ var load_song = function(song) {
     player.jPlayer("play");
 };
 
-var play_next = function() {
+/*var play_next = function() {
     if (current_song.el.index() == songs.length-1) {
         return;
     }
@@ -160,7 +161,7 @@ var play_next = function() {
             load_song(songs[current_song.el.index()+1]);
 	}
     }
-};
+};*/
 
 var make_song_div = function(song, track_order) {
     var container = $("<li>");
@@ -229,7 +230,7 @@ var preload_player = function() {
             player.jPlayer("setMedia", {"mp3": songs[0].fields.url})
             set_title(first_song.fields.artist, first_song.fields.name);
         },
-        ended: play_next,
+        //ended: play_next,
         cssSelectorAncestor: css_target,
         swfPath: "/static/js",
         supplied: "mp3",
