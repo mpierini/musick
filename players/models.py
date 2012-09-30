@@ -29,7 +29,7 @@ class Playlist(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     url = models.CharField(max_length = 100, blank = True)
-    avatar = models.ImageField(upload_to="/static/", default="/static/face.png")
+    #avatar = models.ImageField(upload_to="/static/", default="/static/face.png")
     #this is not migrating but it may be because of the playlist_user entry
 
     #playlists = models.ManyToManyField(Playlist)
