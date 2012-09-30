@@ -166,3 +166,12 @@ TEMPLATE_CONTEXT_PROCESSORS =(
 )
 
 AUTH_PROFILE_MODULE = "players.UserProfile"
+
+
+#trying what the man on the internet said about dev env db stuff
+
+import dj_database_url
+import os
+
+if os.getcwd() == "/players":
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
