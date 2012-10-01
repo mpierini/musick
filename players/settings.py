@@ -14,7 +14,8 @@ MANAGERS = ADMINS
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite3:///db.sqlite3')
+    'default': dj_database_url.config(default='sqlite3:///db.sqlite3'),
+    'NAME': 'heroku_db',
 }
 
 #DATABASES = {
