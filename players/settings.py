@@ -11,6 +11,8 @@ MANAGERS = ADMINS
 
 #setting up db stuff 4 heroku ::
 
+import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(default='sqlite3:///db.sqlite3')
 }
