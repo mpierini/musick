@@ -12,7 +12,9 @@ MANAGERS = ADMINS
 #setting up db stuff 4 heroku ::
 
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+DATABASES = {'default': dj_database_url.config(env='DATABASE_URL')}
+#according to keith.io
+
 #DATABASES = {'default': dj_database_url.config(default='postgres://foo:bar@localhost:5432/db')}
 #DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
