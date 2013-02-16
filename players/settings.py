@@ -14,9 +14,14 @@ MANAGERS = ADMINS
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite3:///db.sqlite3'),
-    'NAME': 'heroku_db',
+    'default':  {
+        'ENGINE': dj_database_url.config(default='sqlite3:///db.sqlite3'),
+        'NAME': 'heroku_db',
+    }
 }
+
+#do i need to configure the above statements more like the below statements?
+#heroku logs traceback seems to want the ENGINE key.
 
 #DATABASES = {
     #'default': {
