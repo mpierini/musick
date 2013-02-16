@@ -12,13 +12,17 @@ MANAGERS = ADMINS
 #setting up db stuff 4 heroku ::
 
 import dj_database_url
+DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+#DATABASES = {'default': dj_database_url.config(default='postgres://foo:bar@localhost:5432/db')}
+#DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
-DATABASES = {
-    'default':  {
-        'ENGINE': dj_database_url.config(default='sqlite3:///db.sqlite3'),
-        'NAME': 'heroku_db',
-    }
-}
+#just tried it this way and it no workied...
+#DATABASES = {
+#    'default':  {
+#        'ENGINE': dj_database_url.config(default='sqlite3:///db.sqlite3'),
+#        'NAME': 'heroku_db',
+#    }
+#}
 
 #do i need to configure the above statements more like the below statements?
 #heroku logs traceback seems to want the ENGINE key.
